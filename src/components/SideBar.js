@@ -13,8 +13,8 @@ export default function Sidebar() {
         <Link href="/inbox" className="block p-2 rounded hover:bg-gray-200">
           Inbox
         </Link>
-        <Link href="/reports" className="block p-2 rounded hover:bg-gray-200">
-          Reports
+        <Link href="/relatar" className="block p-2 rounded hover:bg-gray-200">
+          Registrar Ocorrência
         </Link>
         <Link href="/notifications" className="block p-2 rounded hover:bg-gray-200">
           Notifications

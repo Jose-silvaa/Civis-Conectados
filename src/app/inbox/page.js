@@ -2,9 +2,14 @@
 
 import { useState } from 'react';
 
+import ReportCard from '@/components/ReportCard/ReportCard';
 import Sidebar from '../../components/SideBar';
 
 export default function Home() {
+
+  const media = [
+    { type: "image", url: "../../assets/foto-unsplash.jpg"},
+  ];
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -17,7 +22,7 @@ export default function Home() {
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
       <main className="flex-1 p-6">
-        <div className="mb-2">
+        <div className="mb-4">
             <input
               type="text"
               placeholder="Search..."
@@ -25,7 +30,8 @@ export default function Home() {
               onChange={handleSearchChange}
               className="w-3/6 p-2 border rounded focus:outline-none focus:border-blue-500"
             />
-          </div>
+        </div>
+        <ReportCard title="Roubo a uma residência" location="Rio de Janeiro" date="22/06/2024" time="12:30" description="Roubo a uma residência ocorrido na noite do dia 22/06. Suspeitos arrombaram a porta da frente e levaram eletrônicos e joias." status="Pendente" media={media}/>
       </main>
     </div>
   );
