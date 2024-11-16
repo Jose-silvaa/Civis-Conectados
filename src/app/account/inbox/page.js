@@ -3,7 +3,6 @@
 import { useState } from 'react';
 
 import ReportCard from '@/components/ReportCard/ReportCard';
-import Sidebar from '../../components/SideBar';
 
 export default function Home() {
 
@@ -19,8 +18,7 @@ export default function Home() {
 
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar />
+    <div className="flex h-screen bg-gray-100 w-full">
       <main className="flex-1 p-6">
         <div className="mb-4">
             <input
