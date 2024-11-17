@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Logo from "../../assets/foto-unsplash.jpg"
+import StatusReport from "../StatusReport/StatusReport";
 // import Video from "../../assets/video.mp4"
 
 
-export default function ReportCard({ title, location, date, time, description, status, media }) {
+export default function ReportCard({ title, location, date, time, description, media, adm }) {
+
 
     const [showDetails, setShowDetails] = useState(false);
 
@@ -18,17 +20,6 @@ export default function ReportCard({ title, location, date, time, description, s
 
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
-          <span
-            className={`px-2 py-1 text-sm rounded ${
-              status === "Pendente"
-                ? "bg-yellow-100 text-yellow-700"
-                : status === "Confirmado"
-                ? "bg-green-100 text-green-700"
-                : "bg-gray-100 text-gray-700"
-            }`}
-          >
-            {status}
-          </span>
         </div>
   
         <p className="text-sm text-gray-600">
@@ -43,18 +34,31 @@ export default function ReportCard({ title, location, date, time, description, s
           <strong>Hora:</strong> {time}
         </p>
   
-  
-        <p className="text-sm text-gray-700 mt-2">
+        <p className="text-sm text-gray-600 mt-2">
+          <strong>Descrição: </strong>
           {description}
         </p>
   
-        <div className="mt-4 flex justify-end gap-2">
+        <div className="mt-10 flex justify-start gap-2">
           <button className="px-4 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition" onClick={handleDetailsClick}>
           {showDetails ? "Fechar" : "Ver Midias"}
           </button>
-          <button className="px-4 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition">
-            Relatar como Falso
-          </button>
+
+          {adm ? (
+            <>
+              <button className="px-4 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition">
+                Relatar como Falso
+              </button>
+              <button className="px-4 py-2 text-sm bg-green-500 text-white rounded hover:bg-green-600 transition">
+                Relatar como Verdadeiro
+              </button>
+            </>
+          ) : (
+            <button className="px-4 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+            Fazer Comentário
+            </button>
+          )}
+        
         </div>
         {showDetails && (
         <div className="mt-4">

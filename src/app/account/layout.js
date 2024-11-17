@@ -1,5 +1,6 @@
 import Sidebar from "@/components/SideBar";
 
+
 export default function AccountLayout({
     children, 
   }) {
@@ -9,7 +10,6 @@ export default function AccountLayout({
         <nav>
           <Sidebar/>
         </nav>
-   
         {children}
       </section>
     )
