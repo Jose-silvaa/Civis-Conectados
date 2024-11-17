@@ -8,11 +8,11 @@ export default function Login(){
         
         <form action="#" method="POST" className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <input
-              type="text"
-              id="username"
-              name="username"
+              type="email"
+              id="email"
+              name="email"
               required
               className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
             />
