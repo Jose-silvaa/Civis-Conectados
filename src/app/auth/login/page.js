@@ -24,6 +24,7 @@ export default function Login(){
               type="password"
               id="password"
               name="password"
+              autoComplete="current-password"
               required
               className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
             />

@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from 'react'
+import { registerUser } from '@/firebase/register/firebaseRegister'
+import { auth } from '@/firebase/config'
 
 export default function Register() {
 
   const [error, setError] = useState('')
   const [formData, setFormData] = useState({
-    name : '',
     email : '',
     password : ''
   })  
@@ -23,14 +24,25 @@ export default function Register() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
 
-
-    if (!name || !email || !password) {
+    if (!formData.email || !formData.password) {
       setError('Todos os campos são obrigatórios')
       return
     }
+
+    try {
+      const user = await registerUser(auth, formData.email, formData.password);
+      alert("Usuário criado com sucesso!");
+    } catch (error) {
+      alert(`Erro: ${error.message}`);
+    }
+
+    setFormData({
+      email : '',
+      password : ''
+    })
 
   }
 
@@ -41,23 +53,12 @@ export default function Register() {
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-semibold text-gray-700">Nome</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
-              placeholder="Seu nome completo"
-            />
-          </div>
-          <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700">E-mail</label>
             <input
               type="email"
               id="email"
               name="email"
+              autoComplete="email"
               value={formData.email}
               onChange={handleChange}
               className="w-full mt-2 p-2 border border-gray-300 rounded-md"
@@ -70,6 +71,7 @@ export default function Register() {
               type="password"
               id="password"
               name="password"
+              autoComplete="current-password"
               value={formData.password}
               onChange={handleChange}
               className="w-full mt-2 p-2 border border-gray-300 rounded-md"
