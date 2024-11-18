@@ -3,14 +3,22 @@
 import { useState } from 'react'
 import { registerUser } from '@/firebase/register/firebaseRegister'
 import { auth } from '@/firebase/config'
+import ErrorMessage from '@/utils/ErrorMessage';
 
 export default function Register() {
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email : '',
     password : ''
   })  
+
+
+  const showError = (message) => {
+    setError(message);
+    setTimeout(() => setError(''), 3000);
+  };
+
 
   
   const handleChange = (e) => {
@@ -27,16 +35,20 @@ export default function Register() {
   const handleSubmit = async(e) => {
     e.preventDefault()
 
+    if(formData.password.length < 6){
+      showError("A senha deve ter pelo menos 6 caracteres")
+      return
+    }
+
     if (!formData.email || !formData.password) {
-      setError('Todos os campos são obrigatórios')
+      showError('Todos os campos são obrigatórios');
       return
     }
 
     try {
       const user = await registerUser(auth, formData.email, formData.password);
-      alert("Usuário criado com sucesso!");
     } catch (error) {
-      alert(`Erro: ${error.message}`);
+
     }
 
     setFormData({
@@ -50,7 +62,7 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Cadastro</h2>
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        <ErrorMessage error={error} />
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700">E-mail</label>

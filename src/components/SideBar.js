@@ -5,13 +5,29 @@ import Image from "next/image";
 import newLogo from "../assets/conecta.png"
 import Link from 'next/link';
 import { useState } from 'react';
+import { auth } from "@/firebase/config";
+import { logoutUser } from "@/firebase/logout/firebaseLogout";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/utils/authContext";
 
 
 
 export default function Sidebar() {
 
+  const router = useRouter();
   const [reportReview, setReportReview] = useState(false)
+  const userStatus = useAuth();
 
+  const handleSession = async() =>{
+    
+    try {
+        const user = await logoutUser(auth);
+        router.push("/")
+
+    } catch (error) {
+      
+    }
+  }
 
   const showReportReview = ()=>{
     setReportReview(!reportReview);
@@ -24,6 +40,12 @@ export default function Sidebar() {
       </div>
 
       <nav className="flex-1 p-4 space-y-4">
+
+       {userStatus ? (
+         <h1 className="p-2 text-lg font-bold text-gray-700">{userStatus.email}</h1>
+        ) : (
+          <p className="p-2 text-lg font-bold text-gray-700">Nenhum usuário conectado.</p>
+        )}
         <Link href="/account/inbox" onClick={showReportReview} className="block p-2 rounded hover:bg-gray-200">
           Todas as Ocorrências 
         </Link>
@@ -38,6 +60,12 @@ export default function Sidebar() {
           Registrar Ocorrência
         </Link>
       </nav>
+
+      <div className="p-4">
+          <button className="px-4 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition" onClick={handleSession}>
+              Sair
+          </button>
+      </div>
 
     </div>
   );

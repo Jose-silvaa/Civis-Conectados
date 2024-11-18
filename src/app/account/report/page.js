@@ -1,43 +1,58 @@
 "use client"
 
 import CityDropdown from "@/components/CityDropdown/CityDropdown";
+import uploadImageAndSaveData from "@/utils/updateImageAndSaveData";
 import { useState } from "react";
 
 export default function CreateReport() {
   
     const [error, setError] = useState('')
+    const [midia, setMidia] = useState(null);
     const [localReport, setLocalReport] = useState({
         title : '',
         date : '',
         time : '', 
         city : '',
         description : '',
-        media : []
+        status : 'Pendente',
     })
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
 
+    const showError = (message) => {
+      setError(message);
+      setTimeout(() => setError(''), 3000);
+    };
+  
+
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
         
-        if (!localReport.title || !localReport.date || !localReport.time || !localReport.description) {
-            setError("Por favor, preencha todos os campos");
+        if (!localReport.title || !localReport.date || !localReport.time || !localReport.description || !midia) {
+            showError("Por favor, preencha todos os campos");
             return;
         }
 
+        try {
+           const review = await uploadImageAndSaveData(midia, localReport);
+        } catch (error) {
+        }
+        
         setLocalReport({
             title: "",
             date: "",
             time: "",
             city: "",
             description: "",
-            media: [],
+            status : "Pendente",
         });
+
+        setMidia(null);
         
     }
 
     const handleChange = (e) => {
         const {name, value} = e.target;
-    
+
         setLocalReport((prevData) => ({
             ...prevData,
             [name] : value
@@ -54,10 +69,9 @@ export default function CreateReport() {
 
 
     const handleMediaChange = (e) => {
-        setLocalReport((prevState) => ({
-          ...prevState,
-          media: Array.from(e.target.files), 
-        }));
+
+        const selectedFile = e.target.files[0];
+        setMidia(selectedFile);
     };
 
 
@@ -131,7 +145,6 @@ export default function CreateReport() {
                 type="file"
                 id="media"
                 accept="image/*,video/*"
-                multiple
                 className="mt-1 p-2 w-full border border-gray-300 rounded"
                 onChange={handleMediaChange}
               />

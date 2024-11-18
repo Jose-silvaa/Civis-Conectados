@@ -5,7 +5,7 @@ import StatusReport from "../StatusReport/StatusReport";
 // import Video from "../../assets/video.mp4"
 
 
-export default function ReportCard({ title, location, date, time, description, media, adm }) {
+export default function ReportCard({ title, city, date, time, description, media, adm }) {
 
 
     const [showDetails, setShowDetails] = useState(false);
@@ -23,7 +23,7 @@ export default function ReportCard({ title, location, date, time, description, m
         </div>
   
         <p className="text-sm text-gray-600">
-          <strong>Localização:</strong> {location}
+          <strong>Cidade:</strong> {city}
         </p>
   
         <p className="text-sm text-gray-600">

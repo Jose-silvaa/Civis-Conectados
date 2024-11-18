@@ -1,21 +1,29 @@
 "use client"
 
 import ReportCard from "@/components/ReportCard/ReportCard"
-import { useState } from "react";
+import { getReports } from "@/utils/getReports";
+import { useEffect, useState } from "react";
+
 
 export default function ReportReview(){
 
+    const [reports, setReports] = useState([]);
     const [status, setStatus] = useState("Pendente")
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleSearchChange = (event) => {
       setSearchQuery(event.target.value);
     };
-  
 
-    const media = [
-        { type: "image", url: "../../assets/foto-unsplash.jpg"},
-      ];
+    // useEffect(()=>{
+    //   async function fetchReports() {
+    //       const reportsData = await getReports();
+    //       setReports(reportsData);
+    //   }
+
+    //   fetchReports();
+    // },[])
+  
 
     return(
         <div className="flex h-screen bg-gray-100 w-full">
@@ -30,7 +38,14 @@ export default function ReportReview(){
                     className="w-3/6 p-2 border rounded focus:outline-none focus:border-blue-500"
                     />
                   </div>
-                <ReportCard title="Roubo a uma residência" location="Rio de Janeiro" date="22/06/2024" time="12:30" description="Roubo a uma residência ocorrido na noite do dia 22/06. Suspeitos arrombaram a porta da frente e levaram eletrônicos e joias." status="Pendente" media={media} adm={true}/>
+
+                {reports.map((report)=>{
+                    // console.log(report.id);
+                      return(
+                        <ReportCard key={report.id} title={report.title} city={report.city} date={report.date} time={report.time} description={report.description} status={report.status} media={report.imageUrl} adm={true}/>
+                      )
+                })}
+             
             </section>
         </div>
     )
