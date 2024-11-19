@@ -34,7 +34,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="w-64 h-full bg-red shadow-md flex flex-col">
+    <div className="w-64 h-screen bg-red shadow-md flex flex-col">
       <div className="flex items-center justify-center p-2 border-b">
         <Image src={newLogo} width="500"  alt="logo"/>
       </div>

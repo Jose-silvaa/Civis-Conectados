@@ -8,6 +8,8 @@ export default function CreateReport() {
   
     const [error, setError] = useState('')
     const [midia, setMidia] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [reportSent, setReportSent] = useState(false); 
     const [localReport, setLocalReport] = useState({
         title : '',
         date : '',
@@ -30,11 +32,23 @@ export default function CreateReport() {
         if (!localReport.title || !localReport.date || !localReport.time || !localReport.description || !midia) {
             showError("Por favor, preencha todos os campos");
             return;
-        }
+        } 
+
+        setLoading(true);
 
         try {
            const review = await uploadImageAndSaveData(midia, localReport);
+
+           if(review){
+              setReportSent(true);
+              setTimeout(() => {
+              }, 5000);
+           }else {
+          }
         } catch (error) {
+          setError("Tente novamente");
+        }finally{
+          setLoading(false);
         }
         
         setLocalReport({
@@ -81,7 +95,12 @@ export default function CreateReport() {
       <div className="h-screen w-full mx-auto p-6 bg-gray-100 shadow-lg pt-10">
         <h1 className="text-2xl font-bold text-gray-700 mb-6">Criar nova ocorrência</h1>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        <form onSubmit={handleSubmit}>
+        {loading ? (
+           <div className="flex justify-center">
+            <p className="text-blue-500 font-semibold">Enviando...</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">
               Título
@@ -155,6 +174,11 @@ export default function CreateReport() {
               <button type="reset" className="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">Cancelar</button>
             </div>
           </form>
+        )}
+
+        {reportSent && (
+          <p className="text-green-500 text-center mt-4">Ocorrência enviada, sendo necessário aguardar uma análise mais detalhada</p>
+        )}  
         </div>
     );
   }
