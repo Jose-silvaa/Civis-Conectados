@@ -1,26 +1,32 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { auth } from '@/firebase/config';
 import ReportCard from '@/components/ReportCard/ReportCard';
+import { getReports } from '@/utils/getReports';
 
 
 export default function Home() {
 
   const [searchQuery, setSearchQuery] = useState('');
- 
-  const media = [
-    { type: "image", url: "../../assets/foto-unsplash.jpg"},
-  ];
-
+  const [approveReports, setApproveReports] =  useState([]);
   
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
+
+  useEffect(()=>{
+    async function fetchReports(){
+      const reportsData = await getReports();
+      setApproveReports(reportsData);
+    }
+
+    fetchReports();
+  }, [])
+
   return (
-    <div className="flex h-screen bg-gray-100 w-full">
+    <div className="flex h-auto bg-gray-100 w-full">
       <main className="flex-1 p-6">
         <h1 className="text-2xl font-bold text-gray-700 mb-6">Todas as Ocorrências</h1>
         <div className="mb-4">
@@ -32,7 +38,14 @@ export default function Home() {
               className="w-3/6 p-2 border rounded focus:outline-none focus:border-blue-500"
             />
         </div>
-        <ReportCard title="Roubo a uma residência" city="Rio de Janeiro" date="22/06/2024" time="12:30" description="Roubo a uma residência ocorrido na noite do dia 22/06. Suspeitos arrombaram a porta da frente e levaram eletrônicos e joias." status="Pendente" media={media} adm={false}/>
+
+        {approveReports.map((approve) =>{
+          if(approve.status == "Verdadeiro"){
+            return (
+              <ReportCard key={approve.id} id={approve.id} title={approve.title} city={approve.city} date={approve.date} time={approve.time} description={approve.description} status={approve.status} midia={approve.imageUrl} adm={false} />
+            )
+          }
+        })}
       </main>
     </div>
   );

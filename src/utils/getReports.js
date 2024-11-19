@@ -13,8 +13,6 @@ export async function getReports() {
             ...doc.data(),
         }));
 
-        console.log("Dados dos relatórios:", reportsData);
-
         return reportsData;
 
     } catch (error) {

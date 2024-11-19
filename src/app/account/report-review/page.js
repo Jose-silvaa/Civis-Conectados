@@ -8,25 +8,24 @@ import { useEffect, useState } from "react";
 export default function ReportReview(){
 
     const [reports, setReports] = useState([]);
-    const [status, setStatus] = useState("Pendente")
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleSearchChange = (event) => {
       setSearchQuery(event.target.value);
     };
 
-    // useEffect(()=>{
-    //   async function fetchReports() {
-    //       const reportsData = await getReports();
-    //       setReports(reportsData);
-    //   }
+    useEffect(()=>{
+      async function fetchReports() {
+          const reportsData = await getReports();
+          setReports(reportsData);
+      }
 
-    //   fetchReports();
-    // },[])
+      fetchReports();
+    },[])
   
 
     return(
-        <div className="flex h-screen bg-gray-100 w-full">
+        <div className="flex h-auto bg-gray-100 w-full">
             <section className="flex-1 p-6">
                 <h1 className="text-2xl font-bold text-gray-700 mb-6">Ocorrências Pendentes</h1>
                 <div className="mb-4">
@@ -38,11 +37,11 @@ export default function ReportReview(){
                     className="w-3/6 p-2 border rounded focus:outline-none focus:border-blue-500"
                     />
                   </div>
+            
 
                 {reports.map((report)=>{
-                    // console.log(report.id);
                       return(
-                        <ReportCard key={report.id} title={report.title} city={report.city} date={report.date} time={report.time} description={report.description} status={report.status} media={report.imageUrl} adm={true}/>
+                        <ReportCard key={report.id} id={report.id} title={report.title} city={report.city} date={report.date} time={report.time} description={report.description} status={report.status} midia={report.imageUrl} adm={true} />
                       )
                 })}
              

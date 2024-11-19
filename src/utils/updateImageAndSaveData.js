@@ -21,7 +21,7 @@ export default async function uploadImageAndSaveData(file, userData) {
 
         const generatedId = docRef.id;
 
-        console.log("Documento salvo no Firestore com ID:", generatedId);
+        return generatedId;
 
     } catch (error) {
         console.error("Erro ao salvar a imagem ou dados:", error);

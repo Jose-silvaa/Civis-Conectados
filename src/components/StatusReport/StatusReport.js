@@ -1,21 +1,21 @@
 
-
-export default function StatusReport({ status, onChange }) {
+export default function StatusReport({ status }) {
+  // Classes dinâmicas baseadas no status
+  const statusClass = {
+    Pendente: "bg-yellow-100 text-yellow-700",
+    Verdadeiro: "bg-green-100 text-green-700",
+    Falso : "bg-red-100 text-red-700",
+    Outro: "bg-gray-100 text-gray-700",
+  };
 
   return (
-    <select
-      value={status}
-      onChange={(e) => onChange(e.target.value)}
+    <p
       className={`px-2 py-1 text-sm rounded cursor-pointer ${
-        status === "Pendente"
-          ? "bg-yellow-100 text-yellow-700"
-          : status === "Confirmado"
-          ? "bg-green-100 text-green-700"
-          : "bg-gray-100 text-gray-700"
+        statusClass[status] || statusClass.Outro
       }`}
     >
-      <option value="Pendente">Pendente</option>
-      <option value="Confirmado">Confirmado</option>
-    </select>
+      {status}
+    </p>
   );
 }
+
