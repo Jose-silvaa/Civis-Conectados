@@ -14,8 +14,6 @@ export default function ReportCard({ id, title, city, date, time, description, s
     const [showDetails, setShowDetails] = useState(false);
     const [currentStatus, setCurrentStatus] = useState(status)
 
-
-    console.log(midia);
     const handleDetailsClick = () => {
       setShowDetails(!showDetails); 
     };

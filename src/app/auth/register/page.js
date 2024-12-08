@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { registerUser } from '@/firebase/register/firebaseRegister'
 import { auth } from '@/firebase/config'
 import ErrorMessage from '@/utils/ErrorMessage';
+import MessageFeedback from '@/utils/MessageFeedback';
 
 export default function Register() {
 
+  const [message, setMessage] = useState('')
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email : '',
@@ -18,6 +20,11 @@ export default function Register() {
     setError(message);
     setTimeout(() => setError(''), 3000);
   };
+
+  const showMessage = (message) =>{
+    setMessage(message);
+    setTimeout(() => setMessage(''), 3000);
+  }
 
 
   
@@ -47,8 +54,12 @@ export default function Register() {
 
     try {
       const user = await registerUser(auth, formData.email, formData.password);
+      if(user){
+        showMessage('Cadastro Realizado')
+      }
     } catch (error) {
-
+    }finally{
+     
     }
 
     setFormData({
@@ -63,6 +74,7 @@ export default function Register() {
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Cadastro</h2>
         <ErrorMessage error={error} />
+        <MessageFeedback message={message} />
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700">E-mail</label>
