@@ -1,5 +1,5 @@
-import Sidebar from "@/components/SideBar";
-import { AuthProvider } from "@/utils/authContext";
+import Sidebar from "../../components/SideBar";
+import { AuthProvider } from "../../utils/authContext";
 
 
 export default function AccountLayout({

@@ -1,8 +1,8 @@
-import { storage } from "@/firebase/config"
+import { storage } from "../firebase/config"
 import { collection, addDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid";
-import { db } from "@/firebase/config";
+import { db } from "../firebase/config"
 
 
 export default async function uploadImageAndSaveData(file, userData) {

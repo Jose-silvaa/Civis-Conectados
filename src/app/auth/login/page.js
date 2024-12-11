@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { auth } from "@/firebase/config";
-import { loginUser } from "@/firebase/login/firebaseLogin";
+import { auth } from "../../../firebase/config";
+import { loginUser } from "../../../firebase/login/firebaseLogin";
 import { useRouter } from "next/navigation";
 
 
@@ -99,7 +99,7 @@ export default function Login(){
                <button
                type="submit"
                className="w-full px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 flex justify-center">
-                 <svg class="w-5 h-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                 <svg className="w-5 h-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C6.477 0 2 4.477 2 12h2zm2 5.292a8 8 0 005.292-5.292H6v5.292z"></path>
                  </svg>

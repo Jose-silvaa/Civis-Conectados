@@ -1,11 +1,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import StatusReport from "../StatusReport/StatusReport";
-import { db } from "@/firebase/config";
+import { db } from "../../firebase/config"
 import { doc, getDoc } from "firebase/firestore";
-
-import updateDocument from "@/utils/updateDocument";
-
+import updateDocument from "../../utils/updateDocument";
 
 
 export default function ReportCard({ id, title, city, date, time, description, status, midia, adm}) {

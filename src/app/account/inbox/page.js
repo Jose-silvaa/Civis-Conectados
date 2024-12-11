@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import ReportCard from '@/components/ReportCard/ReportCard';
-import { getReports } from '@/utils/getReports';
+import ReportCard from '../../../components/ReportCard/ReportCard';
+import { getReports } from '../../../utils/getReports';
 
 
 export default function Home() {

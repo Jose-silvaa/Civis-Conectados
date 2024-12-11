@@ -1,7 +1,7 @@
 "use client"
 
-import CityDropdown from "@/components/CityDropdown/CityDropdown";
-import uploadImageAndSaveData from "@/utils/updateImageAndSaveData";
+import CityDropdown from "../../../components/CityDropdown/CityDropdown";
+import uploadImageAndSaveData from "../../../utils/updateImageAndSaveData";
 import { useState } from "react";
 
 export default function CreateReport() {

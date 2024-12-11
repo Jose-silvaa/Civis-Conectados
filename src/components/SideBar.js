@@ -1,14 +1,13 @@
 "use client"
 
-
 import Image from "next/image";
 import newLogo from "../assets/conecta.png"
 import Link from 'next/link';
 import { useState } from 'react';
-import { auth } from "@/firebase/config";
-import { logoutUser } from "@/firebase/logout/firebaseLogout";
+import { auth } from "../firebase/config"
+import { logoutUser } from "../firebase/logout/firebaseLogout";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/utils/authContext";
+import { useAuth } from "../utils/authContext";
 
 
 

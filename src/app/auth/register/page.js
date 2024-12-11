@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from 'react'
-import { registerUser } from '@/firebase/register/firebaseRegister'
-import { auth } from '@/firebase/config'
-import ErrorMessage from '@/utils/ErrorMessage';
-import MessageFeedback from '@/utils/MessageFeedback';
+import { registerUser } from '../../../firebase/register/firebaseRegister';
+import { auth } from '../../../firebase/config'
+import ErrorMessage from '../../../utils/ErrorMessage';
+import MessageFeedback from '../../../utils/MessageFeedback';
 
 export default function Register() {
 
